@@ -57,6 +57,10 @@ void displayRegistryData(carRegistry *regPtr) {
     for(int i = 0; i < REGISTRY_SIZE; i++) {
         cout << "Owner #" << (i + 1) << ": " << endl;
         cout << "Owner's Name: " << regPtr->ownerName << endl;
-        
+        cout << "License Plate: " << regPtr->licensePlate << endl;
+        cout << "Number of Cars: " << regPtr->numofCar << endl;
+        for(int j = 0; j < regPtr->numofCar; j++) {
+            cout << "Car Make #" << (j + 1) << ": " << regPtr->carMake[j] << endl;
+        }
     }
 }
