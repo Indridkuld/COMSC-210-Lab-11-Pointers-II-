@@ -41,14 +41,14 @@ void inputRegistryData(carRegistry *regPtr) {
         cin.ignore();
         getline(cin, regPtr->ownerName);
         cout << "License Plate: ";
-        getline(cin, regPtr[i].licensePlate);
+        getline(cin, regPtr->licensePlate);
         cout << "Number of Cars: ";
-        cin >> regPtr[i].numofCar;
-        regPtr[i].carMake = new string[regPtr[i]->numofCar];
+        cin >> regPtr->numofCar;
+        regPtr->carMake = new string[regPtr->numofCar];
         cin.ignore();
-        for(int j = 0; j < registry[i].numofCar; j++) {
+        for(int j = 0; j < regPtr->numofCar; j++) {
             cout << "Car Make #" << (j + 1) << ": ";
-            getline(cin, registry[i].carMake[j]);
+            getline(cin, regPtr->carMake[j]);
         }
     }
 }
