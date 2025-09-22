@@ -20,6 +20,7 @@ struct carRegistry {
             delete[] carMake;
         }
         carMake = nullptr;
+    }
 };
 
 // Function prototypes
@@ -28,7 +29,13 @@ void displayRegistryData(carRegistry *regPtr);
 
 int main() {
     carRegistry *registry = new carRegistry[REGISTRY_SIZE];
-
+    
+    inputRegistryData(registry);
+    displayRegistryData(registry);
+    
+    // Clean up memory
+    delete[] registry;
+    
     return 0;
 }
 
@@ -39,17 +46,18 @@ void inputRegistryData(carRegistry *regPtr) {
         cout << "Enter details for owner #" << (i + 1) << ":\n";
         cout << "Owner's Name: ";
         cin.ignore();
-        getline(cin, regPtr->ownerName);
+        getline(cin, (regPtr+i)->ownerName);
         cout << "License Plate: ";
-        getline(cin, regPtr->licensePlate);
+        getline(cin, (regPtr+i)->licensePlate);
         cout << "Number of Cars: ";
-        cin >> regPtr->numofCar;
-        regPtr->carMake = new string[regPtr->numofCar];
+        cin >> (regPtr+i)->numofCar;
+        (regPtr+i)->carMake = new string[(regPtr+i)->numofCar];
         cin.ignore();
-        for(int j = 0; j < regPtr->numofCar; j++) {
+        for(int j = 0; j < (regPtr+i)->numofCar; j++) {
             cout << "Car Make #" << (j + 1) << ": ";
-            getline(cin, regPtr->carMake[j]);
+            getline(cin, (regPtr+i)->carMake[j]);
         }
+        cout << endl;
     }
 }
 
