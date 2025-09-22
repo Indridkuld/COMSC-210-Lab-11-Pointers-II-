@@ -1,5 +1,6 @@
 // COMSC-210 | Lab 11: Pointers II | Aidan Woodcock | 2025-09-21
 // IDE used: Visual Studio Code
+// Program to manage a car owner's registry using structures, pointers, and dynamic memory allocation, this could be useful for a car dealership or rental service.
 
 #include <iostream>
 #include <iomanip>
@@ -11,7 +12,7 @@ const int REGISTRY_SIZE = 3;
 // Structure to represent a car owner's registry
 struct carRegistry {
     string ownerName;    // Name of the car owner
-    string licensePlate; // License plate number
+    string licensePlate; // License plate number, could have also been dynamic but kept it simple
     int numofCar;        // Number of cars owned
     string *carMake;     // Dynamic array to store car makes
 
@@ -22,7 +23,7 @@ struct carRegistry {
         }
         carMake = nullptr;
     }
-}
+};
 
 
 // Function prototypes
@@ -35,12 +36,12 @@ int main() {
     
     // Input data for each registry entry
     for (int i = 0; i < REGISTRY_SIZE; i++) {
-        inputRegistryData(&registry[i], i);
+        inputRegistryData(&registry[i]);
     }
     
     // Display all registry data
     for (int i = 0; i < REGISTRY_SIZE; i++) {
-        displayRegistryData(&registry[i], i);
+        displayRegistryData(&registry[i]);
     }
     
     // Clean up memory by deleting the dynamic array
@@ -52,7 +53,6 @@ int main() {
 // Function definitions
 // inputs data for a car registry entry using pointers and dynamic memory allocation
 void inputRegistryData(carRegistry *regPtr) {
-    for(int i = 0; i < REGISTRY_SIZE; i++) {
         cout << "Enter details for owner #" << (i + 1) << ":\n";
         cout << "Owner's Name: ";
         cin.ignore();
@@ -67,7 +67,6 @@ void inputRegistryData(carRegistry *regPtr) {
             cout << "Car Make #" << (j + 1) << ": ";
             getline(cin, regPtr->carMake[j]);
         }
-    }
 }
 
 void displayRegistryData(carRegistry *regPtr) {
