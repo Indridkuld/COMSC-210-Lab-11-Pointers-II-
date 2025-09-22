@@ -7,14 +7,15 @@
 
 using namespace std;
 
-const int REGISTRY_SIZE = 3, CARMAKE_SIZE = 5;
-
+const int REGISTRY_SIZE = 3; 
+// Structure to represent a car owner's registry
 struct carRegistry {
-    string ownerName;
-    string licensePlate;
-    int numofCar;
-    string *carMake;
+    string ownerName;    // Name of the car owner
+    string licensePlate; // License plate number
+    int numofCar;        // Number of cars owned
+    string *carMake;     // Dynamic array to store car makes
 
+    // Destructor to clean up dynamically allocated memory
     ~carRegistry() {
         if(carMake) {
             delete[] carMake;
@@ -23,17 +24,26 @@ struct carRegistry {
     }
 };
 
+
 // Function prototypes
 void inputRegistryData(carRegistry *regPtr);
 void displayRegistryData(carRegistry *regPtr);
 
 int main() {
+    // Create a dynamic array of carRegistry structs
     carRegistry *registry = new carRegistry[REGISTRY_SIZE];
     
-    inputRegistryData(registry);
-    displayRegistryData(registry);
+    // Input data for each registry entry
+    for (int i = 0; i < REGISTRY_SIZE; i++) {
+        inputRegistryData(&registry[i], i);
+    }
     
-    // Clean up memory
+    // Display all registry data
+    for (int i = 0; i < REGISTRY_SIZE; i++) {
+        displayRegistryData(&registry[i], i);
+    }
+    
+    // Clean up memory by deleting the dynamic array
     delete[] registry;
     
     return 0;
@@ -46,18 +56,17 @@ void inputRegistryData(carRegistry *regPtr) {
         cout << "Enter details for owner #" << (i + 1) << ":\n";
         cout << "Owner's Name: ";
         cin.ignore();
-        getline(cin, (regPtr+i)->ownerName);
+        getline(cin, regPtr->ownerName);
         cout << "License Plate: ";
-        getline(cin, (regPtr+i)->licensePlate);
+        getline(cin, regPtr->licensePlate);
         cout << "Number of Cars: ";
-        cin >> (regPtr+i)->numofCar;
-        (regPtr+i)->carMake = new string[(regPtr+i)->numofCar];
+        cin >> regPtr->numofCar;
+        regPtr->carMake = new string[regPtr->numofCar];
         cin.ignore();
-        for(int j = 0; j < (regPtr+i)->numofCar; j++) {
+        for(int j = 0; j < regPtr->numofCar; j++) {
             cout << "Car Make #" << (j + 1) << ": ";
-            getline(cin, (regPtr+i)->carMake[j]);
+            getline(cin, regPtr->carMake[j]);
         }
-        cout << endl;
     }
 }
 
