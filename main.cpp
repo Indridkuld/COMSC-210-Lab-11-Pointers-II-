@@ -51,26 +51,31 @@ int main() {
 }
 
 // Function definitions
-// inputs data for a car registry entry using pointers and dynamic memory allocation
+// Function to input data for a car registry entry using pointers and dynamic memory allocation
 void inputRegistryData(carRegistry *regPtr) {
-        cout << "Enter details for owner #" << (i + 1) << ":\n";
-        cout << "Owner's Name: ";
-        cin.ignore();
-        getline(cin, regPtr->ownerName);
-        cout << "License Plate: ";
-        getline(cin, regPtr->licensePlate);
-        cout << "Number of Cars: ";
-        cin >> regPtr->numofCar;
-        regPtr->carMake = new string[regPtr->numofCar];
-        cin.ignore();
-        for(int j = 0; j < regPtr->numofCar; j++) {
-            cout << "Car Make #" << (j + 1) << ": ";
-            getline(cin, regPtr->carMake[j]);
-        }
+    static int ownerCount = 1; // Static variable to track owner number
+    cout << "Enter details for owner #" << ownerCount << ":\n";
+    cout << "Owner's Name: ";
+    cin.ignore(); 
+    getline(cin, regPtr->ownerName);
+    cout << "License Plate: ";
+    getline(cin, regPtr->licensePlate);
+    cout << "Number of Cars: ";
+    cin >> regPtr->numofCar;
+    // Create dynamic array for car makes based on number of cars
+    regPtr->carMake = new string[regPtr->numofCar];
+    cin.ignore(); 
+    for(int j = 0; j < regPtr->numofCar; j++) {
+        cout << "Car Make #" << (j + 1) << ": ";
+        getline(cin, regPtr->carMake[j]);
+    }
+    cout << endl << endl;
+    ownerCount++;
 }
 
 void displayRegistryData(carRegistry *regPtr) {
-    for(int i = 0; i < REGISTRY_SIZE; i++) {
+        static int i = 0;
+        cout << "Summary of Car Registry Entry: #" << (i + 1) << endl;
         cout << "Owner #" << (i + 1) << ": " << endl;
         cout << "Owner's Name: " << regPtr->ownerName << endl;
         cout << "License Plate: " << regPtr->licensePlate << endl;
@@ -78,5 +83,6 @@ void displayRegistryData(carRegistry *regPtr) {
         for(int j = 0; j < regPtr->numofCar; j++) {
             cout << "Car Make #" << (j + 1) << ": " << regPtr->carMake[j] << endl;
         }
-    }
+        cout << endl << endl;
+        i++;
 }
