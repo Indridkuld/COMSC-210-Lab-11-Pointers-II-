@@ -22,7 +22,7 @@ struct carRegistry {
         }
         carMake = nullptr;
     }
-};
+}
 
 
 // Function prototypes
