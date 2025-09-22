@@ -52,3 +52,11 @@ void inputRegistryData(carRegistry *regPtr) {
         }
     }
 }
+
+void displayRegistryData(carRegistry *regPtr) {
+    for(int i = 0; i < REGISTRY_SIZE; i++) {
+        cout << "Owner #" << (i + 1) << ": " << endl;
+        cout << "Owner's Name: " << regPtr->ownerName << endl;
+        
+    }
+}
